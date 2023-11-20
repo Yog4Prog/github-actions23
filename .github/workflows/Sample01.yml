@@ -23,19 +23,20 @@ jobs:
         npm --version
     - name: Download Node 20 Version
       run: |
-        curl -o node-v20.tar.xz https://nodejs.org/dist/v20.9.0/node-v20.9.0-linux-arm64.tar.xz
+        curl -o node-v20.tar.xz https://nodejs.org/dist/v20.9.0/node-v20.9.0-linux-x64.tar.xz
     - name: Extract Node 
       run: |
         mkdir sw 
         tar -C sw -xf node-v20.tar.xz
         ls -ltr ${{ github.workspace }}
-        cd sw/node-v20.9.0-linux-arm64
+        cd sw/node-v20.9.0-linux-x64
         ls -ltr
     - name: Detect Node20 version
       run: | 
-       # export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin:$PATH
-        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin/node --version
-        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin/npm --version
+       # export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
+        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin/node --version
+        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin/npm --version
     - name: Detect Npm20 version
       run: | 
         npm --version
+        node --version
