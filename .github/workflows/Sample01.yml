@@ -28,6 +28,7 @@ jobs:
       run: |
         mkdir sw 
         tar -C sw -xf node-v20.tar.xz
+        ls -ltr ${{ github.workspace }}
     - name: Detect Node20 version
       run: | 
         ./sw/node --version
