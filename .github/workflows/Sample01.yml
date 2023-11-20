@@ -29,7 +29,7 @@ jobs:
         mkdir sw 
         tar -C sw -xf node-v20.tar.xz
         ls -ltr ${{ github.workspace }}
-        cd sw
+        cd sw/node-v20.9.0-linux-arm64
         ls -ltr
     - name: Detect Node20 version
       run: | 
