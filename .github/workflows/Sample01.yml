@@ -1,0 +1,23 @@
+name: Github Actions Demo
+on: 
+  workflow_dispatch:
+  
+jobs:
+  Example-Actions-Job:
+    name: Exploring Github Actions
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "Payload field is ${{ github.event.client_payload.mydata }}"
+    # Display the event that triggered the workflow
+    - run: echo "The job was triggerd by a ${{ github.event_name }} event."
+    
+    # Runner information
+    - run: echo "This job is running on ${{ runner.os }} server hosted by GitHub."
+    
+    - name: Detect Node version
+      run: | 
+        node --version
+     
+    - name: Detect Npm version
+      run: | 
+        npm --version
