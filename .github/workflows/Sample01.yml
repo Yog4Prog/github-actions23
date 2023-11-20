@@ -33,9 +33,9 @@ jobs:
         ls -ltr
     - name: Detect Node20 version
       run: | 
-        export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin:$PATH
-        node --version
-        npm --version
+       # export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin:$PATH
+        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin/node --version
+        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-arm64/bin/npm --version
     - name: Detect Npm20 version
       run: | 
         npm --version
