@@ -27,7 +27,7 @@ jobs:
     - name: Extract Node 
       run: |
         mkdir sw 
-        tar -C sw -xfv node-v20.tar.xz
+        tar -C sw -xf node-v20.tar.xz
     - name: Detect Node20 version
       run: | 
         ./sw/node --version
