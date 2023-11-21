@@ -33,13 +33,13 @@ jobs:
         ls -ltr
     - name: Detect Node20 version
       run: | 
-        export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
+        export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
         npm --version
         node --version
 
     - name: Run NPM
       run: | 
-        export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
+        export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
         npm install 
         npm run build
         npm pack
