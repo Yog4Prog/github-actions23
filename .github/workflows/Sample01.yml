@@ -36,7 +36,9 @@ jobs:
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
         npm --version
         node --version
-
+    - name: Checkout
+      uses: actions/checkout@v4
+      
     - name: Run NPM
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
