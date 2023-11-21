@@ -33,10 +33,15 @@ jobs:
         ls -ltr
     - name: Detect Node20 version
       run: | 
-       # export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
-        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin/node --version
-        /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin/npm --version
-    - name: Detect Npm20 version
-      run: | 
+        export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
         npm --version
         node --version
+
+    - name: Run NPM
+      run: | 
+        export PATH= /home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
+        npm install 
+        npm run build
+        npm pack
+        curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr https://selfeducation.jfrog.io/artifactory/api/npm/auth > .npmrc
+        npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm/
