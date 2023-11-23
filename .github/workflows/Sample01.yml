@@ -45,5 +45,6 @@ jobs:
         npm install 
         npm run build
         npm pack
-        curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog > .npmrc
+        curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
+        cat .npmrc
         npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/
