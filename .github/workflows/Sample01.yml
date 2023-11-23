@@ -49,10 +49,10 @@ jobs:
         npm pack
         rm -f .npmrc
     - name: Run Action
-        uses: ./
-        id: hello
-        with:
-          who-to-greet: 'Yogendra Prasad'
+      uses: ./
+      id: hello
+      with:
+        who-to-greet: 'Yogendra Prasad'
    # - name: Publish
    #     export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
    #     curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
