@@ -55,6 +55,6 @@ jobs:
     - name: Publish
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
-        curl -uraju4read:AP2DeeYUBjYE7TTXMSEBuRfRJC2 "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
-        cat .npmrc
+        #curl -uraju4read:AP2DeeYUBjYE7TTXMSEBuRfRJC2 "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
+        #cat .npmrc
         npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/
