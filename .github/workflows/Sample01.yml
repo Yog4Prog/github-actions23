@@ -43,20 +43,17 @@ jobs:
     - name: Build 
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
-        curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
+        #curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
+        curl -uraju4read:AP2DeeYUBjYE7TTXMSEBuRfRJC2 "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
         cat .npmrc
         npm install 
         npm run build
         npm pack
-        rm -f .npmrcgit restore 
-    - name: Run Action
-      uses: ./
-      id: hello
-      with:
-        who-to-greet: 'Yogendra Prasad'
+        rm -f .npmrc 
+    
 
-   # - name: Publish
-   #     export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
-   #     curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
-   #     cat .npmrc
-        #npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/
+    - name: Publish
+        export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
+        curl -uraju4read:AP2DeeYUBjYE7TTXMSEBuRfRJC2 "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
+        cat .npmrc
+        npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/
