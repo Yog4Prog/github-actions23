@@ -45,11 +45,17 @@ jobs:
       run: |
         cat ./package.json >> $GITHUB_OUTPUT
     - name: Print OUtput
+      env: 
+        PACKAGE_NAME: ${{ fromJson(steps.read-json.outputs.packageConfig).name }}
+        PACKAGE_VERSION: ${{ fromJson(steps.read-json.outputs.packageConfig).version }}
       run: |
         echo "${{ fromJson(steps.read-json.outputs.packageConfig).version }}"
         echo "${{ fromJson(steps.read-json.outputs.packageConfig).name }}"
-    - name: Build 
+    - name: Build
+      env: 
+        FILETOPUB: $PACKAGE_NAME.$PACKAGE_VERSION.tgz
       run: | 
+        echo "Package to Publish is $FILETOPUB"
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
         #curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
         curl -uraju4read:AP2DeeYUBjYE7TTXMSEBuRfRJC2 "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
