@@ -40,6 +40,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
+    - name: Detect Package Name
+      id: read-json
+      run: |
+        echo "packageConfig<<EOF" >> $GITHUB_OUTPUT
+        cat ./package.json >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+    - name: Print OUtput
+      run: |
+        echo "${{ fromJson(steps.read-json.outputs.packageConfig).version }}"
+        echo "${{ fromJson(steps.read-json.outputs.packageConfig).name }}"
     - name: Build 
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
@@ -59,4 +69,14 @@ jobs:
         #curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
         #mv -f .npmrc npm/
         #cat npm/.npmrc
-        npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
+        # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
+   
+    - name: Publish NPM Package
+      run: | 
+        export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
+        #curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
+        #mv -f .npmrc npm/
+        #cat npm/.npmrc
+        # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
+
+   
