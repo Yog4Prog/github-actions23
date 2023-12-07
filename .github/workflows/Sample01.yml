@@ -43,9 +43,7 @@ jobs:
     - name: Detect Package Name
       id: read-json
       run: |
-        echo "packageConfig<<EOF" >> $GITHUB_OUTPUT
         cat ./package.json >> $GITHUB_OUTPUT
-        echo "EOF" >> $GITHUB_OUTPUT
     - name: Print OUtput
       run: |
         echo "${{ fromJson(steps.read-json.outputs.packageConfig).version }}"
