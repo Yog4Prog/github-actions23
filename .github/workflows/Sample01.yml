@@ -76,6 +76,7 @@ jobs:
         #mv -f .npmrc npm/
         #cat npm/.npmrc
         # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
+        curl -v --user raju4cloud1:AP7L5WkZYceUnSoVYZuGq6rRyi4 --data-binary "${{ fromJson(steps.read-json.outputs.packageConfig).name }}.${{ fromJson(steps.read-json.outputs.packageConfig).version }}.tgz" -X PUT "https://studentwf.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/${{ fromJson(steps.read-json.outputs.packageConfig).name }}.${{ fromJson(steps.read-json.outputs.packageConfig).version }}.tgz"
    
     - name: Publish NPM Package
       run: | 
