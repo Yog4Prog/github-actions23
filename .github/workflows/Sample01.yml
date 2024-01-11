@@ -77,18 +77,18 @@ jobs:
         find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }'
         artifactTgzFiles=$(find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }')
         echo $artifactTgzFiles
-        cp $artifactTgzFiles ./artifacts 
+        cp $artifactTgzFiles ./artifacts/ 
         echo "artifactTgzFileName=$artifactTgzFiles" >> $GITHUB_OUTPUT
 
         find . -name *.yml -maxdepth 1 | awk -F/ '{ print $NF }'
         artifactYmlFiles=$(find . -name *.yml -maxdepth 1 | awk -F/ '{ print $NF }')
         echo $artifactYmlFiles
-        cp $artifactYmlFiles ./artifacts
+        cp $artifactYmlFiles ./artifacts/
         
-        find . -name *.json -maxdepth 1 | awk -F/ '{ print $NF }'
-        artifactJsonFiles=$(find . -name *.json -maxdepth 1 | awk -F/ '{ print $NF }')
+        find . -name '*.json' -maxdepth 1 | awk -F/ '{ print $NF }'
+        artifactJsonFiles=$(find . -name '*.json' -maxdepth 1 | awk -F/ '{ print $NF }')
         echo $artifactJsonFiles
-        cp $artifactJsonFiles ./artifacts
+        cp $artifactJsonFiles ./artifacts/
         
         dir ./artifacts
 
