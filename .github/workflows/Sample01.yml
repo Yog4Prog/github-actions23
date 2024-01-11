@@ -72,15 +72,30 @@ jobs:
     - name: Fetch Artifacts Name
       id: fan
       run : |
+        mkdir artifacts
+        
         find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }'
         artifactTgzFiles=$(find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }')
         echo $artifactTgzFiles
+        cp $artifactTgzFiles ./artifacts 
         echo "artifactTgzFileName=$artifactTgzFiles" >> $GITHUB_OUTPUT
+
+        find . -name *.yml -maxdepth 1 | awk -F/ '{ print $NF }'
+        artifactYmlFiles=$(find . -name *.yml -maxdepth 1 | awk -F/ '{ print $NF }')
+        echo $artifactYmlFiles
+        cp $artifactYmlFiles ./artifacts
+        
+        find . -name *.json -maxdepth 1 | awk -F/ '{ print $NF }'
+        artifactJsonFiles=$(find . -name *.json -maxdepth 1 | awk -F/ '{ print $NF }')
+        echo $artifactJsonFiles
+        cp $artifactJsonFiles ./artifacts
+        
+        dir ./artifacts
 
     - name: Zip Artifacts
       run: |
-         mkdir artifacts
-         
+        tar -czvf artifacts.tar.gz ./artifacts 
+    
     - name: Publish
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
@@ -88,7 +103,7 @@ jobs:
         #mv -f .npmrc npm/
         #cat npm/.npmrc
         # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
-        curl -v --user raju4cloud1:AP7L5WkZYceUnSoVYZuGq6rRyi4 --data-binary "${{ fromJson(steps.read-json.outputs.packageConfig).name }}.${{ fromJson(steps.read-json.outputs.packageConfig).version }}.tgz" -X PUT "https://studentwf.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/${{ fromJson(steps.read-json.outputs.packageConfig).name }}.${{ fromJson(steps.read-json.outputs.packageConfig).version }}.tgz"
+        curl -v --user raju4cloud1:AP7L5WkZYceUnSoVYZuGq6rRyi4 --data-binary artifacts.tar.gz -X PUT "https://studentwf.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/artifacts.tar.gz"
    
     
     
