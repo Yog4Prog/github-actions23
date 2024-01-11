@@ -73,7 +73,7 @@ jobs:
       id: fan
       run : |
         find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }'
-        artifactTgzType = $(find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }')
+        artifactTgzFiles=$(find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }')
         echo $artifactTgzFiles
         echo "artifactTgzFileName"=$artifactTgzFiles" >> $GITHUB_OUTPUT
 
