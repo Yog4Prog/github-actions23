@@ -69,6 +69,18 @@ jobs:
         rm -f npm/.npmrc 
     
 
+    - name: Fetch Artifacts Name
+      id: fan
+      run : |
+        find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }'
+        artifactTgzType = $(find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }')
+        echo $artifactTgzFiles
+        echo "artifactTgzFileName"=$artifactTgzFiles" >> $GITHUB_OUTPUT
+
+    - name: Zip Artifacts
+      run: |
+         mkdir artifacts
+         
     - name: Publish
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
@@ -78,6 +90,8 @@ jobs:
         # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
         curl -v --user raju4cloud1:AP7L5WkZYceUnSoVYZuGq6rRyi4 --data-binary "${{ fromJson(steps.read-json.outputs.packageConfig).name }}.${{ fromJson(steps.read-json.outputs.packageConfig).version }}.tgz" -X PUT "https://studentwf.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/${{ fromJson(steps.read-json.outputs.packageConfig).name }}.${{ fromJson(steps.read-json.outputs.packageConfig).version }}.tgz"
    
+    
+    
     - name: Publish NPM Package
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
