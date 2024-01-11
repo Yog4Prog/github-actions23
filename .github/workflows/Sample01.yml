@@ -94,7 +94,7 @@ jobs:
 
     - name: Zip Artifacts
       run: |
-        tar -czvf artifacts.tar.gz ./artifacts 
+        zip -r artifacts.zip ./artifacts 
     
     - name: Publish
       run: | 
