@@ -83,7 +83,7 @@ jobs:
         find . -name *.ymlabc -maxdepth 1 | awk -F/ '{ print $NF }'
         artifactYmlFiles=$(find . -name *.ymlabc -maxdepth 1 | awk -F/ '{ print $NF }')
         echo $artifactYmlFiles
-        cp $artifactYmlFiles ./artifacts/
+        #cp $artifactYmlFiles ./artifacts/
         
         find . -name '*.json' -maxdepth 1 | awk -F/ '{ print $NF }'
         artifactJsonFiles=$(find . -name '*.json' -maxdepth 1 | awk -F/ '{ print $NF }')
