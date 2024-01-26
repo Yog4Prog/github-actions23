@@ -86,31 +86,51 @@ jobs:
     - name: Fetch Artifacts Name
       id: fan
       run : |
-        mkdir artifacts
         
-        find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }'
-        artifactTgzFiles=$(find . -name *.tgz -maxdepth 1 | awk -F/ '{ print $NF }')
-        echo $artifactTgzFiles
-        #cp $artifactTgzFiles ./artifacts/ 
-        echo "artifactTgzFileName=$artifactTgzFiles" >> $GITHUB_OUTPUT
+        file_extensions=("zip" "tgz" "nupkg")
+        
+        found_files_zip=()
+        found_files_tar=()
+        found_files_nupkg=()
 
-        find . -name *.ymlabc -maxdepth 1 | awk -F/ '{ print $NF }'
-        artifactYmlFiles=$(find . -name *.ymlabc -maxdepth 1 | awk -F/ '{ print $NF }')
-        echo $artifactYmlFiles
-        #cp $artifactYmlFiles ./artifacts/
+        for ext in "${file_extensions[@]}"; do
+          files=$(find . -maxdepth 5 -type f -name "*.$ext")
+          if [ -n "$files" ]; then
+            case $ext in
+              "zip")
+                found_files_zip+=("$files")
+                ;;
+              "tar")
+                found_files_tar+=("$files")
+                ;;
+              "nupkg")
+                found_files_nupkg+=("$files")
+               ;;
+            esac
+          fi
+        done
         
-        find . -name '*.json' -maxdepth 1 | awk -F/ '{ print $NF }'
-        artifactJsonFiles=$(find . -name '*.json' -maxdepth 1 | awk -F/ '{ print $NF }')
-        echo $artifactJsonFiles
-        
-        cp $artifactTgzFiles $artifactYmlFiles $artifactJsonFiles -t ./artifacts/
-        
-        dir ./artifacts
+        if [ ${#found_files_zip[@]} -gt 0 ]; then
+          mkdir -p artifactsZip
+          cp "${found_files_zip[@]}" "./artifactsZip/"
+          ls ./artifactsZip
+          zip -r artifactsZip.zip ./artifactsZip
+        fi
+     
+        if [ ${#found_files_tar[@]} -gt 0 ]; then
+          mkdir -p artifactsTar
+          cp "${found_files_tar[@]}" "./artifactsTar/"
+          ls ./artifactsTar
+          zip -r artifactsTar.zip ./artifactsTar
+        fi
 
-    - name: Zip Artifacts
-      run: |
-        zip -r artifacts.zip ./artifacts 
-    
+        if [ ${#found_files_nupkg[@]} -gt 0 ]; then
+          mkdir -p artifactsNupkg
+          cp "${found_files_nupkg[@]}" "./artifactsNupkg/"
+          ls ./artifactsNupkg
+          zip -r artifactsNupkg.zip ./artifactsNupkg
+        fi
+
     - name: Publish
       run: | 
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
