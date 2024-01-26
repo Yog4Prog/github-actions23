@@ -127,7 +127,7 @@ jobs:
         fi
      
         if [ ${#found_files_tgz[@]} -gt 0 ]; then
-          mkdir -p artifactstgz
+          mkdir -p artifactsTgz
           cp "${found_files_tgz[@]}" "./artifactsTgz/"
           ls ./artifactsTgz
           zip -r artifactsTgz.zip ./artifactsTgz
