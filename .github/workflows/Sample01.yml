@@ -89,74 +89,39 @@ jobs:
         
         file_extensions=("zip" "tgz" "nupkg" "csproj" "abc")
         
-        found_files_zip=()
-        found_files_tgz=()
-        found_files_nupkg=()
-        found_files_csproj=()
-        found_files_abc=()
-        
-
         for ext in "${file_extensions[@]}"; do
           files=$(find . -maxdepth 5 -type f -name "*.$ext")
           if [ -n "$files" ]; then
             case $ext in
               "zip")
-                found_files_zip+=("$files")
+                destination_folder="artifactsZip"
+                zipFileName="artifactsZip.zip"
                 ;;
               "tgz")
-                found_files_tgz+=("$files")
+                destination_folder="artifactsTgz"
+                zipFileName="artifactsTgz.zip"
                 ;;
               "nupkg")
-                found_files_nupkg+=("$files")
+                destination_folder="artifactsNupkg"
+                zipFileName="artifactsNupkg.zip"
                ;;
               "csproj")
-                found_files_csproj+=("$files")
+                destination_folder="artifactsCsproj"
+                zipFileName="artifactsCsproj.zip"
                ;;
               "abc")
-                found_files_abc+=("$files")
+                destination_folder="artifactsAbc"
+                zipFileName="artifactsAbc.zip"
                ;;
             esac
+            mkdir -p "$destination_folder"
+            for file in $files; do
+              cp "$file" "$destination_folder"
+            done
+            zip -r "$zipFileName" "$destination_folder"
           fi
         done
         
-        if [ ${#found_files_zip[@]} -gt 0 ]; then
-          mkdir -p artifactsZip
-          cp "${found_files_zip[@]}" "./artifactsZip/"
-          ls ./artifactsZip
-          zip -r artifactsZip.zip ./artifactsZip
-        fi
-     
-        if [ ${#found_files_tgz[@]} -gt 0 ]; then
-          mkdir -p artifactsTgz
-          cp "${found_files_tgz[@]}" "./artifactsTgz/"
-          ls ./artifactsTgz
-          zip -r artifactsTgz.zip ./artifactsTgz
-        fi
-
-        if [ ${#found_files_nupkg[@]} -gt 0 ]; then
-          mkdir -p artifactsNupkg
-          for file in "${found_files_nupkg[@]}"; do
-           cp "$file" "./artifactsNupkg/"
-         done
-          ls ./artifactsNupkg
-          zip -r artifactsNupkg.zip ./artifactsNupkg
-        fi
-
-        if [ ${#found_files_csproj[@]} -gt 0 ]; then
-          mkdir -p artifactsCsproj
-          for file in "${found_files_csproj[@]}"; do
-           cp "$file" "./artifactsCsproj/"
-          done
-          ls ./artifactsCsproj
-          zip -r artifactsCsproj.zip ./artifactsCsproj
-        fi
-
-        if [ ${#found_files_abc[@]} -gt 0 ]; then
-          mkdir -p artifactsAbc
-          cp "${found_files_abc[@]}" "./artifactsAbc/"
-          ls ./artifactsAbc
-          zip -r artifactsAbc.zip ./artifactsAbc
-        fi
 
     - name: Publish
       run: | 
