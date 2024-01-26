@@ -37,6 +37,11 @@ jobs:
         export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
         npm --version
         node --version
+    - name: Setup Dotnet
+      uses: actions/setup-dotnet@v3
+      with: 
+        dotnet-version: '7.0'
+
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -68,6 +73,11 @@ jobs:
         npm pack
         rm -f npm/.npmrc 
     
+    - name: Build Dotnet Component
+      id: dotnet-build
+      run : |
+        dotnet msbuild build.proj 
+       
 
     - name: Fetch Artifacts Name
       id: fan
