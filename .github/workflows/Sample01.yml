@@ -87,11 +87,14 @@ jobs:
       id: fan
       run : |
         
-        file_extensions=("zip" "tgz" "nupkg")
+        file_extensions=("zip" "tgz" "nupkg" "json" "abc")
         
         found_files_zip=()
-        found_files_tar=()
+        found_files_tgz=()
         found_files_nupkg=()
+        found_files_json=()
+        found_files_abc=()
+        
 
         for ext in "${file_extensions[@]}"; do
           files=$(find . -maxdepth 5 -type f -name "*.$ext")
@@ -100,11 +103,17 @@ jobs:
               "zip")
                 found_files_zip+=("$files")
                 ;;
-              "tar")
-                found_files_tar+=("$files")
+              "tgz")
+                found_files_tgz+=("$files")
                 ;;
               "nupkg")
                 found_files_nupkg+=("$files")
+               ;;
+              "json")
+                found_files_json+=("$files")
+               ;;
+              "abc")
+                found_files_abc+=("$files")
                ;;
             esac
           fi
@@ -117,11 +126,11 @@ jobs:
           zip -r artifactsZip.zip ./artifactsZip
         fi
      
-        if [ ${#found_files_tar[@]} -gt 0 ]; then
-          mkdir -p artifactsTar
-          cp "${found_files_tar[@]}" "./artifactsTar/"
-          ls ./artifactsTar
-          zip -r artifactsTar.zip ./artifactsTar
+        if [ ${#found_files_tgz[@]} -gt 0 ]; then
+          mkdir -p artifactstgz
+          cp "${found_files_tgz[@]}" "./artifactsTgz/"
+          ls ./artifactsTgz
+          zip -r artifactsTgz.zip ./artifactsTgz
         fi
 
         if [ ${#found_files_nupkg[@]} -gt 0 ]; then
@@ -129,6 +138,20 @@ jobs:
           cp "${found_files_nupkg[@]}" "./artifactsNupkg/"
           ls ./artifactsNupkg
           zip -r artifactsNupkg.zip ./artifactsNupkg
+        fi
+
+        if [ ${#found_files_json[@]} -gt 0 ]; then
+          mkdir -p artifactsJson
+          cp "${found_files_json[@]}" "./artifactsJson/"
+          ls ./artifactsJson
+          zip -r artifactsJson.zip ./artifactsJson
+        fi
+
+        if [ ${#found_files_abc[@]} -gt 0 ]; then
+          mkdir -p artifactsAbc
+          cp "${found_files_abc[@]}" "./artifactsAbc/"
+          ls ./artifactsAbc
+          zip -r artifactsAbc.zip ./artifactsAbc
         fi
 
     - name: Publish
