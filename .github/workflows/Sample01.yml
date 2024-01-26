@@ -84,7 +84,7 @@ jobs:
         zip -r dotnet-artifacts.zip dotnetProj/WebApp/bin/Debug/net7.0
 
     - name: Fetch Artifacts Name
-      id: fan
+      id: fetch-artifacts
       run : |
         
         file_extensions=("zip" "tgz" "nupkg" "csproj" "abc" "json")
@@ -96,26 +96,32 @@ jobs:
               "zip")
                 destination_folder="artifactsZip"
                 zipFileName="artifactsZip.zip"
+                echo "zipTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                 ;;
               "tgz")
                 destination_folder="artifactsTgz"
                 zipFileName="artifactsTgz.zip"
+                echo "tgzTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                 ;;
               "nupkg")
                 destination_folder="artifactsNupkg"
                 zipFileName="artifactsNupkg.zip"
+                echo "nugetTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "csproj")
                 destination_folder="artifactsCsproj"
                 zipFileName="artifactsCsproj.zip"
+                echo "genericTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "abc")
                 destination_folder="artifactsAbc"
                 zipFileName="artifactsAbc.zip"
+                echo "abcTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "json")
                 destination_folder="artifactsJson"
                 zipFileName="artifactsJson.zip"
+                echo "jsonTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
             esac
             mkdir -p "$destination_folder"
@@ -126,20 +132,18 @@ jobs:
           fi
         done
         
-
-    
     - name: Publish Npm
-      if: -e artifactsTgz.zip
+      if: [${{steps.fetch-artifacts.outputs.tgzTypeArtifact-exists}}] == true
       run: |
         curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsTgz.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
  
     - name: Publish Nuget
-      if: -e artifactsNupkg.zip
+      if: [${{steps.fetch-artifacts.outputs.nugetTypeArtifact-exists}}] == true
       run: | 
         curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsNupkg.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/student-home-nuget/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
     - name: Publish Generic
-      if: -e artifactsZip.zip
+      if: [${{steps.fetch-artifacts.outputs.zipTypeArtifact-exists}}] == true
       run: | 
         curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/student-home-generic/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
