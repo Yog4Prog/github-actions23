@@ -87,10 +87,10 @@ jobs:
 
     - name: Resolve Repository Name
       run: |
-        ARTI_NPM_REPO=$( echo $ARTI_REPO | sed 's/nuget/npm')
+        ARTI_NPM_REPO=$( echo $ARTI_REPO | sed 's/nuget/npm/')
         echo "ARTI_NPM_REPO=$ARTI_NPM_REPO" >> $GITHUB_ENV
 
-        ARTI_GENERIC_REPO=$( echo $ARTI_REPO | sed 's/nuget/generic')
+        ARTI_GENERIC_REPO=$( echo $ARTI_REPO | sed 's/nuget/generic/')
         echo "ARTI_GENERIC_REPO=$ARTI_GENERIC_REPO" >> $GITHUB_ENV
     
     - name: Fetch Artifacts Name
