@@ -87,12 +87,12 @@ jobs:
       id: fan
       run : |
         
-        file_extensions=("zip" "tgz" "nupkg" "json" "abc")
+        file_extensions=("zip" "tgz" "nupkg" "csproj" "abc")
         
         found_files_zip=()
         found_files_tgz=()
         found_files_nupkg=()
-        found_files_json=()
+        found_files_csproj=()
         found_files_abc=()
         
 
@@ -109,8 +109,8 @@ jobs:
               "nupkg")
                 found_files_nupkg+=("$files")
                ;;
-              "json")
-                found_files_json+=("$files")
+              "csproj")
+                found_files_csproj+=("$files")
                ;;
               "abc")
                 found_files_abc+=("$files")
@@ -140,11 +140,11 @@ jobs:
           zip -r artifactsNupkg.zip ./artifactsNupkg
         fi
 
-        if [ ${#found_files_json[@]} -gt 0 ]; then
-          mkdir -p artifactsJson
-          cp "${found_files_json[@]}" "./artifactsJson/"
-          ls ./artifactsJson
-          zip -r artifactsJson.zip ./artifactsJson
+        if [ ${#found_files_csproj[@]} -gt 0 ]; then
+          mkdir -p artifactsCsproj
+          cp "${found_files_csproj[@]}" "./artifactsCsproj/"
+          ls ./artifactsCsproj
+          zip -r artifactsCsproj.zip ./artifactsCsproj
         fi
 
         if [ ${#found_files_abc[@]} -gt 0 ]; then
