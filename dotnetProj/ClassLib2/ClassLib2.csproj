@@ -5,8 +5,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-     <PackageId>ClassLibDotNetWorkflow</PackageId>
-    <Version>1.0.1</Version>
+    <PackageId>ClassLib2DotNetWorkflow</PackageId>
+    <Version>1.0.0</Version>
     <Authors>Yogendra</Authors>
     <Company>Learning</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild> 
