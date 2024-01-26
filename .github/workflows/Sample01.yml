@@ -155,14 +155,14 @@ jobs:
     - name: Publish Generic (zip)
       if: steps.fetch-artifacts.outputs.zipTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{ ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{ env.ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
     - name: Publish Generic (Json)
       if: steps.fetch-artifacts.outputs.jsonTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsJson.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory${{ ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsJson.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory${{ env.ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
    
     - name: Publish Generic (CSProj)
       if: steps.fetch-artifacts.outputs.CsprojTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsCsproj.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{ ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsCsproj.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{ env.ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
