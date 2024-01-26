@@ -76,9 +76,13 @@ jobs:
     - name: Build Dotnet Component
       id: dotnet-build
       run : |
-        dotnet msbuild build.proj 
-       
-
+        dotnet msbuild dotnetProj\build.proj 
+        
+    - name: Zip Dotnet Artifacts
+      id: zip-dotnet-artifacts
+      run: |
+        zip -r dotnet-artifacts.zip dotnetProj\WebApp\bin\Debug\net7.0
+        
     - name: Fetch Artifacts Name
       id: fan
       run : |
