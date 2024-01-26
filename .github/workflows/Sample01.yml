@@ -135,7 +135,7 @@ jobs:
 
         if [ ${#found_files_nupkg[@]} -gt 0 ]; then
           mkdir -p artifactsNupkg
-          for file in "${#found_files_nupkg[@]}"; do
+          for file in "${found_files_nupkg[@]}"; do
            cp "$file" "./artifactsNupkg/"
          done
           ls ./artifactsNupkg
@@ -144,7 +144,7 @@ jobs:
 
         if [ ${#found_files_csproj[@]} -gt 0 ]; then
           mkdir -p artifactsCsproj
-          for file in "${#found_files_csproj[@]}"; do
+          for file in "${found_files_csproj[@]}"; do
            cp "$file" "./artifactsCsproj/"
           done
           ls ./artifactsCsproj
