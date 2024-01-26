@@ -135,14 +135,18 @@ jobs:
 
         if [ ${#found_files_nupkg[@]} -gt 0 ]; then
           mkdir -p artifactsNupkg
-          cp "${found_files_nupkg[@]}" "./artifactsNupkg/"
+          for file in "${#found_files_nupkg[@]}"; do
+           cp "$file" "./artifactsNupkg/"
+         done
           ls ./artifactsNupkg
           zip -r artifactsNupkg.zip ./artifactsNupkg
         fi
 
         if [ ${#found_files_csproj[@]} -gt 0 ]; then
           mkdir -p artifactsCsproj
-          cp "${found_files_csproj[@]}" "./artifactsCsproj/"
+          for file in "${#found_files_csproj[@]}"; do
+           cp "$file" "./artifactsCsproj/"
+          done
           ls ./artifactsCsproj
           zip -r artifactsCsproj.zip ./artifactsCsproj
         fi
