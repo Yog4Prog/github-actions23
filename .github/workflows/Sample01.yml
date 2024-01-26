@@ -87,7 +87,7 @@ jobs:
       id: fan
       run : |
         
-        file_extensions=("zip" "tgz" "nupkg" "csproj" "abc")
+        file_extensions=("zip" "tgz" "nupkg" "csproj" "abc" "json")
         
         for ext in "${file_extensions[@]}"; do
           files=$(find . -maxdepth 5 -type f -name "*.$ext")
@@ -112,6 +112,10 @@ jobs:
               "abc")
                 destination_folder="artifactsAbc"
                 zipFileName="artifactsAbc.zip"
+               ;;
+              "json")
+                destination_folder="artifactsJson"
+                zipFileName="artifactsJson.zip"
                ;;
             esac
             mkdir -p "$destination_folder"
