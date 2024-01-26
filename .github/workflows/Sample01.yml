@@ -127,23 +127,20 @@ jobs:
         done
         
 
-    - name: Publish
-      run: | 
-        export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
-        #curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
-        #mv -f .npmrc npm/
-        #cat npm/.npmrc
-        # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
-        curl -v --user raju4cloud1:AP7L5WkZYceUnSoVYZuGq6rRyi4 -T artifacts.zip -X PUT -H 'X-Explode-Archive: true' "https://studentwf.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
-   
     
-    
-    - name: Publish NPM Package
+    - name: Publish Npm
+      if: -e artifactsTgz.zip
+      run: |
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsTgz.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/student-home-npm/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+ 
+    - name: Publish Nuget
+      if: -e artifactsNupkg.zip
       run: | 
-        export PATH=/home/runner/work/github-actions23/github-actions23/sw/node-v20.9.0-linux-x64/bin:$PATH
-        #curl -uraju4cloud:AP2PoNKU4AAE8jMYqWRq8URGHwr "https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/auth/jfrog" > .npmrc
-        #mv -f .npmrc npm/
-        #cat npm/.npmrc
-        # npm publish --registry https://selfeducation.jfrog.io/artifactory/api/npm/npm-yoglib-local/ --userconfig npm/.npmrc
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsNupkg.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/student-home-nuget/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+
+    - name: Publish Generic
+      if: -e artifactsZip.zip
+      run: | 
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/student-home-generic/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
    
