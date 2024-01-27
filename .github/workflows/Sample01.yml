@@ -105,32 +105,32 @@ jobs:
             case $ext in
               "zip")
                 destination_folder="artifactsZip"
-                zipFileName="artifactsZip.zip"
+                archieveName="artifactsZip.zip"
                 echo "zipTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                 ;;
               "tgz")
                 destination_folder="artifactsTgz"
-                zipFileName="artifactsTgz.zip"
+                archieveName="artifactsTgz.zip"
                 echo "tgzTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                 ;;
               "nupkg")
                 destination_folder="artifactsNupkg"
-                zipFileName="artifactsNupkg.zip"
+                archieveName="artifactsNupkg.zip"
                 echo "nugetTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "csproj")
                 destination_folder="artifactsCsproj"
-                zipFileName="artifactsCsproj.zip"
+                archieveName="artifactsCsproj.zip"
                 echo "csprojTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "abc")
                 destination_folder="artifactsAbc"
-                zipFileName="artifactsAbc.zip"
+                archieveName="artifactsAbc.zip"
                 echo "abcTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "json")
                 destination_folder="artifactsJson"
-                zipFileName="artifactsJson.zip"
+                archieveName="artifactsJson.zip"
                 echo "jsonTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
             esac
@@ -138,7 +138,7 @@ jobs:
             for file in $files; do
               cp "$file" "$destination_folder"
             done
-            cd $destination_folder && zip -r "../$zipFileName" . && cd ..
+            cd $destination_folder && zip -r "../$archieveName" . && cd ..
           fi
         done
         
