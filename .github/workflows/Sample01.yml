@@ -138,7 +138,7 @@ jobs:
             for file in $files; do
               cp "$file" "$destination_folder"
             done
-            zip -r "$zipFileName" -i "./$destination_folder/*"
+            cd $destination_folder && zip -r "../$zipFileName" . && cd ..
           fi
         done
         
