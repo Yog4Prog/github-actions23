@@ -26,8 +26,8 @@ jobs:
           dotnetCommand="dotnet build"
           if [ -n "${{ inputs.dotnet_build_params}}" ]; then
             dotnetCommand="$dotnetCommand ${{ inputs.dotnet_build_params}}"
-            echo "dotnetCommand=$dotnetCommand" >> $GITHUB_OUTPUT
           fi
+          echo "dotnetCommand=$dotnetCommand" >> $GITHUB_OUTPUT
       - name: Validate Dotnet Command
         run: |
           echo "${{ steps.prepare-dotnet-command.outputs.dotnetCommand}}"
