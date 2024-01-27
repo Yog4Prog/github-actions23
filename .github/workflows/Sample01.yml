@@ -146,7 +146,7 @@ jobs:
       if: steps.fetch-artifacts.outputs.tgzTypeArtifact-exists == 'true'
       run: |
         curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsTgz.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{env.ARTI_NPM_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
- 
+        
     - name: Publish Nuget
       if: steps.fetch-artifacts.outputs.nugetTypeArtifact-exists == 'true'
       run: | 
@@ -156,6 +156,7 @@ jobs:
       if: steps.fetch-artifacts.outputs.zipTypeArtifact-exists == 'true'
       run: | 
         curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{ env.ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsZip.zip -X PUT "https://studenthome.jfrog.io/artifactory/${{ env.ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
     - name: Publish Generic (Json)
       if: steps.fetch-artifacts.outputs.jsonTypeArtifact-exists == 'true'
