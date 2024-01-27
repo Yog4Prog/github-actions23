@@ -2,6 +2,11 @@ name: Github Actions Demo(2)
 on: 
   workflow_dispatch:
     inputs:
+      dotnet_build_params:
+        description: 'Dotnet Build Params'
+        required: false
+        default: ''
+
       your_input_name:
         description: 'Description of your input'
         required: true
@@ -12,8 +17,17 @@ jobs:
     name: Exploring Github Actions
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
       - name: Display Input
-        run: echo "Your input is ${{ inputs.your_input_name }}"
+        run: echo "Your input is ${{ inputs.dotnet_build_params }}"
+      
+      - name: Prepare Dotnet Command
+        id: prepare-dotnet-command
+        run: |
+          dotnetCommand="dotnet build"
+          if [ -n "${{ inputs.dotnet_build_params}}" ]; then
+            dotnetCommand="$dotnetCommand ${{ inputs.dotnet_build_params}}"
+            echo "dotnetCommand=$dotnetCommand" >> $GITHUB_OUTPUT
+          fi
+      - name: Validate Dotnet Command
+        run: |
+          echo "${{ steps.prepare-dotnet-command.outputs.dotnetCommand}}"
