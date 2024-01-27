@@ -11,11 +11,6 @@ jobs:
   Set-CLI-Paramater:
     name: Exploring Github Actions
     runs-on: ubuntu-latest
-    inputs:
-      your_input_name:
-        description: 'Description of your input'
-        required: true
-        default: 'default_value'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
