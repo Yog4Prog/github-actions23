@@ -150,7 +150,7 @@ jobs:
     - name: Publish Nuget
       if: steps.fetch-artifacts.outputs.nugetTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsNupkg.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{env.ARTI_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP6p63fJbtFZ9i72CQiJALhxZdu -T artifactsNupkg.nupkg -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{env.ARTI_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
     - name: Publish Generic (zip)
       if: steps.fetch-artifacts.outputs.zipTypeArtifact-exists == 'true'
