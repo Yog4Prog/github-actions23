@@ -115,7 +115,7 @@ jobs:
                 ;;
               "nupkg")
                 destination_folder="artifactsNupkg"
-                archieveName="artifactsNupkg.zip"
+                archieveName="artifactsNupkg.nupkg"
                 echo "nugetTypeArtifact-exists=true" >> $GITHUB_OUTPUT
                ;;
               "csproj")
