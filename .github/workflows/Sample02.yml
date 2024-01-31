@@ -23,7 +23,7 @@ jobs:
       - name: Prepare Dotnet Command
         id: prepare-dotnet-command
         run: |
-          dotnetCommand="dotnet build"
+          dotnetCommand='dotnet build "${{ inputs.your_input_name}}"'
           if [ -n "${{ inputs.dotnet_build_params}}" ]; then
             dotnetCommand="$dotnetCommand ${{ inputs.dotnet_build_params}}"
           fi
