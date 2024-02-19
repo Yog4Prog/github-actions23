@@ -1,0 +1,14 @@
+name: Looping Uses Action Example
+
+on:
+  workflow_dispatch:
+ 
+
+jobs:
+  loop_job:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Check dotnet sdk installed
+        run: |
+          dotnet --list-sdks
