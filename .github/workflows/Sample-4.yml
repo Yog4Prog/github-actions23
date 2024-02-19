@@ -1,4 +1,4 @@
-name: Looping Uses Action Example
+name: Dotnet SDKs
 
 on:
   workflow_dispatch:
