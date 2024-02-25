@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "ClassLib\ClassL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib2", "ClassLib2\ClassLib2.csproj", "{A86C6851-8F57-4F7F-853D-B46B4BD2F33D}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VBClassLib", "VBClassLib\VBClassLib.vbproj", "{A7D56931-361A-4897-A881-F0EF5F809A23}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "VBClassLibNUnit", "VBClassLibNUnit\VBClassLibNUnit.vbproj", "{2D1F019E-A6CC-455C-A5D8-24BC210C9BB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +34,13 @@ Global
 		{A86C6851-8F57-4F7F-853D-B46B4BD2F33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A86C6851-8F57-4F7F-853D-B46B4BD2F33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A86C6851-8F57-4F7F-853D-B46B4BD2F33D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7D56931-361A-4897-A881-F0EF5F809A23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7D56931-361A-4897-A881-F0EF5F809A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7D56931-361A-4897-A881-F0EF5F809A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7D56931-361A-4897-A881-F0EF5F809A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D1F019E-A6CC-455C-A5D8-24BC210C9BB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D1F019E-A6CC-455C-A5D8-24BC210C9BB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D1F019E-A6CC-455C-A5D8-24BC210C9BB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D1F019E-A6CC-455C-A5D8-24BC210C9BB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
