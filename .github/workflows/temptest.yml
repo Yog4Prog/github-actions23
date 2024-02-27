@@ -24,6 +24,7 @@ jobs:
       name: Sample Step
       run: |
         echo "Inputs are "
-        echo "${{ inputs.params1 }} ${{ inputs.params1}}"
+        echo "${{ inputs.params1 }} ${{ inputs.params2}}"
+        echo "${{ inputs.params1  ${{ inputs.params2}} }} "
         
       
