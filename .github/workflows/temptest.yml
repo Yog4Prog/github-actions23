@@ -2,6 +2,10 @@ name: SomeExecution
 run-name: Executing 
 on: 
   workflow_dispatch
+    inputs:
+      PARAM1:
+        required: true
+        type: string
 jobs:
   MyTest:
     runs-on: ubuntu-latest
@@ -11,4 +15,6 @@ jobs:
       run: |
         artifacts=home1.movie.sirir.apple.20302456.09.89.01.zip|home1.movie.sirir.apple.20302456.09.89.02.zip|home1.movie.sirir.apple.20302456.09.89.03.zip|home1.movie.sirir.apple.20302456.09.89.04.nupkg
         echo "artifacts=$artifacts" >> $GITHUB_OUTPUT
+
+        
       
