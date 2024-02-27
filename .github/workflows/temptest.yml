@@ -25,6 +25,7 @@ jobs:
       run: |
         artifacts=home1.movie.sirir.apple.20302456.09.89.01.zip|home1.movie.sirir.apple.20302456.09.89.02.zip|home1.movie.sirir.apple.20302456.09.89.03.zip|home1.movie.sirir.apple.20302456.09.89.04.nupkg
         echo "artifacts=$artifacts" >> $GITHUB_OUTPUT
-
+        echo "Inputs are "
+        echo "${{ inputs.params1 }} ${{ inputs.params1}}"
         
       
