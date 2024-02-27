@@ -25,6 +25,6 @@ jobs:
       run: |
         echo "Inputs are "
         echo "${{ inputs.params1 }} ${{ inputs.params2}}"
-        echo "${{ inputs.params1  ${{ inputs.params2}} }} "
+        echo "${{ inputs.params1   inputs.params2 }} "
         
       
