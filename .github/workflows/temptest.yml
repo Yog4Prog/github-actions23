@@ -1,11 +1,21 @@
 name: SomeExecution
 run-name: Executing 
 on: 
-  workflow_dispatch
+  workflow_dispatch:
     inputs:
-      PARAM1:
+      params1:
+        description: 'Params1'
+        required: false
+        default: ''
+      params2:
+         description: 'Params2'
+         required: false
+         default: ''
+
+      your_input_name:
+        description: 'Description of your input'
         required: true
-        type: string
+        default: 'default_value'
 jobs:
   MyTest:
     runs-on: ubuntu-latest
