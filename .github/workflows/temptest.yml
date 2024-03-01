@@ -23,17 +23,25 @@ jobs:
     - id: Sameple-step
       name: Sample Step
       run: |
+        dir=$(pwd)
         echo "Zip1 file content " >> one.zip
         echo "Zip2 file content " >> two.zip
         echo "nuspec one file content " >> one.nupkg
         echo "nuspec two file content " >> two.nupkg
 
+        find . -name '*.zip' -maxdepth 1 | awk -F/ '{ print $NF }'
         zipFilesList=$(find . -name '*.zip' -maxdepth 1 | awk -F/ '{ print $NF }' )
+        echo $dir
+        
+        echo $zipFilesList
+        echo "location=$dir" >> $GITHUB_OUTPUT
+        echo"zipFilesList=$zipFilesList >> $GITHUB_OUTPUT
+        
         nugetFilesList=$(find . -name '*.nupkg' -maxdepth 1 | awk -F/ '{ print $NF }' )
 
         mkdir -p location
         cp -f $zipFilesList $nugetFilesList ./location/
-
+        
         allFilesList="$zipFilesList $nugetFilesList"
         allFiles=$(echo $allFilesList | sed 's/ /|/g')
         echo "allFiles=$allFiles" >> $GITHUB_OUTPUT
