@@ -34,8 +34,8 @@ jobs:
         mkdir -p location
         cp -f $zipFilesList $nugetFilesList ./location/
 
-        allFilesList = "$zipFilesList $nugetFilesList"
-        allFiles = $(echo $allFilesList | sed 's/ /|/g')
+        allFilesList="$zipFilesList $nugetFilesList"
+        allFiles=$(echo $allFilesList | sed 's/ /|/g')
         echo "allFiles=$allFiles" >> $GITHUB_OUTPUT
         
         
