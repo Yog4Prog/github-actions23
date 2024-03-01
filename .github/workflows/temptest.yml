@@ -43,7 +43,9 @@ jobs:
         cp -f $zipFilesList $nugetFilesList ./location/
         
         allFilesList="$zipFilesList $nugetFilesList"
+        echo $allFilesList
         allFiles=$(echo $allFilesList | sed 's/ /|/g')
+        echo $allFiles
         echo "allFiles=$allFiles" >> $GITHUB_OUTPUT
         
         
