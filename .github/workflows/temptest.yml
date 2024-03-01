@@ -34,8 +34,8 @@ jobs:
         echo $dir
         
         echo $zipFilesList
-        echo "location=$dir" >> $GITHUB_OUTPUT
-        echo "zipFilesList=$zipFilesList" >> $GITHUB_OUTPUT
+        # echo "location=$dir" >> $GITHUB_OUTPUT
+        # echo "zipFilesList=$zipFilesList" >> $GITHUB_OUTPUT
         
         nugetFilesList=$(find . -name '*.nupkg' -maxdepth 1 | awk -F/ '{ print $NF }' )
 
