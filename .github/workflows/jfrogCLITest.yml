@@ -18,12 +18,12 @@ jobs:
 
     - name: Download JFrog CLI
       run: |
-        wget -O jfrog https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.52.7/jfrog-cli-linux-386/jf
+        wget -O jf https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.52.7/jfrog-cli-linux-386/jf
         ls -ltr
-        chmod +x jfrog
+        chmod +x jf
     
     - name: Verify JFrog CLI installation
-      run: jfrog --version
+      run: jf --version
       
     - name: Checkout
       uses: actions/checkout@v4
