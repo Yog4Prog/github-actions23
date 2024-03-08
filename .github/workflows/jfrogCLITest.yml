@@ -16,6 +16,14 @@ jobs:
       with: 
         dotnet-version: '7.0'
 
+    - name: Download JFrog CLI
+      run: |
+        wget -O jfrog https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.52.7/jfrog-cli-linux-386/jf
+        chmod +x jf
+    
+    - name: Verify JFrog CLI installation
+      run: jf --version
+      
     - name: Checkout
       uses: actions/checkout@v4
 
