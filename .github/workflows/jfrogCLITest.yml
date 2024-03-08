@@ -37,7 +37,7 @@ jobs:
       id: dotnet-build
       run : |
         ./jf dotnet restore dotnetProj/GitWorkflowDotnet.sln --build-name="student-home-web-app" --build-number="1.0.1.${{ github.run_id }}"
-        ./jf dotnet build 'dotnetProj/build.proj' --build-name="student-home-web-app" --build-number="1.0.1.${{ github.run_id }}"
+        ./jf dotnet build 'dotnetProj/build.proj' --build-name="student-home-web-app" --build-number="1.0.1.${{ github.run_id }} --no-restore"
         ./jf rt build-collect-env "student-home-web-app" "1.0.1.${{ github.run_id }}
         ./jf rt build-add-git "student-home-web-app" "1.0.1.${{ github.run_id }}
 
@@ -48,62 +48,62 @@ jobs:
         zip -r dotnet-artifacts.zip dotnetProj/WebApp/bin/Debug/net7.0
         ls -ltr
 
-    - name: Resolve Repository Name
-      run: |
-        ARTI_NPM_REPO=$( echo $ARTI_REPO | sed 's/nuget/npm/')
-        echo "ARTI_NPM_REPO=$ARTI_NPM_REPO" >> $GITHUB_ENV
+    # - name: Resolve Repository Name
+    #   run: |
+    #     ARTI_NPM_REPO=$( echo $ARTI_REPO | sed 's/nuget/npm/')
+    #     echo "ARTI_NPM_REPO=$ARTI_NPM_REPO" >> $GITHUB_ENV
 
-        ARTI_GENERIC_REPO=$( echo $ARTI_REPO | sed 's/nuget/generic/')
-        echo "ARTI_GENERIC_REPO=$ARTI_GENERIC_REPO" >> $GITHUB_ENV
+    #     ARTI_GENERIC_REPO=$( echo $ARTI_REPO | sed 's/nuget/generic/')
+    #     echo "ARTI_GENERIC_REPO=$ARTI_GENERIC_REPO" >> $GITHUB_ENV
         
-    - name: Fetch Artifacts Name
-      id: fetch-artifacts
-      run : |
+    # - name: Fetch Artifacts Name
+    #   id: fetch-artifacts
+    #   run : |
         
-        file_extensions=("zip" "tgz" "nupkg" "csproj" "abc" "json")
+    #     file_extensions=("zip" "tgz" "nupkg" "csproj" "abc" "json")
         
-        for ext in "${file_extensions[@]}"; do
-          files=$(find . -maxdepth 5 -type f -name "*.$ext")
-          if [ -n "$files" ]; then
-            case $ext in
-              "zip")
-                destination_folder="artifactsZip"
-                archieveName="artifactsZip.zip"
-                echo "zipTypeArtifact-exists=true" >> $GITHUB_OUTPUT
-                ;;
-              "tgz")
-                destination_folder="artifactsTgz"
-                archieveName="artifactsTgz.zip"
-                echo "tgzTypeArtifact-exists=true" >> $GITHUB_OUTPUT
-                ;;
-              "nupkg")
-                destination_folder="artifactsNupkg"
-                archieveName="artifactsNupkg.nupkg"
-                echo "nugetTypeArtifact-exists=true" >> $GITHUB_OUTPUT
-               ;;
-              "csproj")
-                destination_folder="artifactsCsproj"
-                archieveName="artifactsCsproj.zip"
-                echo "csprojTypeArtifact-exists=true" >> $GITHUB_OUTPUT
-               ;;
-              "abc")
-                destination_folder="artifactsAbc"
-                archieveName="artifactsAbc.zip"
-                echo "abcTypeArtifact-exists=true" >> $GITHUB_OUTPUT
-               ;;
-              "json")
-                destination_folder="artifactsJson"
-                archieveName="artifactsJson.zip"
-                echo "jsonTypeArtifact-exists=true" >> $GITHUB_OUTPUT
-               ;;
-            esac
-            mkdir -p "$destination_folder"
-            for file in $files; do
-              cp "$file" "$destination_folder"
-            done
-            cd $destination_folder && zip -r "../$archieveName" . && cd ..
-          fi
-        done
+    #     for ext in "${file_extensions[@]}"; do
+    #       files=$(find . -maxdepth 5 -type f -name "*.$ext")
+    #       if [ -n "$files" ]; then
+    #         case $ext in
+    #           "zip")
+    #             destination_folder="artifactsZip"
+    #             archieveName="artifactsZip.zip"
+    #             echo "zipTypeArtifact-exists=true" >> $GITHUB_OUTPUT
+    #             ;;
+    #           "tgz")
+    #             destination_folder="artifactsTgz"
+    #             archieveName="artifactsTgz.zip"
+    #             echo "tgzTypeArtifact-exists=true" >> $GITHUB_OUTPUT
+    #             ;;
+    #           "nupkg")
+    #             destination_folder="artifactsNupkg"
+    #             archieveName="artifactsNupkg.nupkg"
+    #             echo "nugetTypeArtifact-exists=true" >> $GITHUB_OUTPUT
+    #            ;;
+    #           "csproj")
+    #             destination_folder="artifactsCsproj"
+    #             archieveName="artifactsCsproj.zip"
+    #             echo "csprojTypeArtifact-exists=true" >> $GITHUB_OUTPUT
+    #            ;;
+    #           "abc")
+    #             destination_folder="artifactsAbc"
+    #             archieveName="artifactsAbc.zip"
+    #             echo "abcTypeArtifact-exists=true" >> $GITHUB_OUTPUT
+    #            ;;
+    #           "json")
+    #             destination_folder="artifactsJson"
+    #             archieveName="artifactsJson.zip"
+    #             echo "jsonTypeArtifact-exists=true" >> $GITHUB_OUTPUT
+    #            ;;
+    #         esac
+    #         mkdir -p "$destination_folder"
+    #         for file in $files; do
+    #           cp "$file" "$destination_folder"
+    #         done
+    #         cd $destination_folder && zip -r "../$archieveName" . && cd ..
+    #       fi
+    #     done
            
     - name: Publish Nuget
       if: steps.fetch-artifacts.outputs.nugetTypeArtifact-exists == 'true'
