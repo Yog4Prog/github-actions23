@@ -31,8 +31,8 @@ jobs:
         pwd
         ls -ltr
         ./jf --version
-        ./jf config add student3642 --artifactory-url "https://student3642.jfrog.io/artifactory" --user="raju4cloud" --password="AKCpBrwZPApYJGo9rCnqW2cLghhCwhNoN3ihEvzdSzHCCNNYx6U3sp4ftMmxPcRbg6Wem1779" --interactive=false
-        ./jf dotnet-config --nuget-v2 "true" --repo-resolve "external-nuget-virtual"
+        ./jf config add student3642 --artifactory-url="https://student3642.jfrog.io/artifactory" --user="raju4cloud" --password="AKCpBrwZPApYJGo9rCnqW2cLghhCwhNoN3ihEvzdSzHCCNNYx6U3sp4ftMmxPcRbg6Wem1779" --interactive=false
+        ./jf dotnet-config --nuget-v2="true" --repo-resolve="external-nuget-virtual" --server-id-resolve="student3642"
 
     - name: Build Dotnet Component
       id: dotnet-build
