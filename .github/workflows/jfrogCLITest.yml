@@ -1,6 +1,7 @@
-name: JFrog Artifactory Actions Demo
+name: JFrog CLI POC
 on: 
   workflow_dispatch:
+  push:
   
   
 jobs:
