@@ -1,0 +1,6 @@
+version: 1
+type: dotnet
+resolver:
+    repo: external-nuget-virtual
+    serverId: student3642
+    nugetV2: true
