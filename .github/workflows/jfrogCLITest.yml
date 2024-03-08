@@ -20,10 +20,10 @@ jobs:
       run: |
         wget -O jfrog https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.52.7/jfrog-cli-linux-386/jf
         ls -ltr
-        chmod +x jf
+        chmod +x jfrog
     
     - name: Verify JFrog CLI installation
-      run: jf --version
+      run: jfrog --version
       
     - name: Checkout
       uses: actions/checkout@v4
