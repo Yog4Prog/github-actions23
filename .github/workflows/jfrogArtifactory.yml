@@ -1,4 +1,4 @@
-name: Github Actions Demo
+name: JFrog Artifactory Actions Demo
 on: 
   workflow_dispatch:
   
