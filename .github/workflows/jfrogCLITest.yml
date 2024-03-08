@@ -16,6 +16,9 @@ jobs:
       with: 
         dotnet-version: '7.0'
 
+    - name: Checkout
+      uses: actions/checkout@v4
+    
     - name: Download JFrog CLI
       run: |
         wget -O jf https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/2.52.7/jfrog-cli-linux-386/jf
@@ -23,10 +26,10 @@ jobs:
         chmod +x jf
     
     - name: Verify JFrog CLI installation
-      run: jf --version
-      
-    - name: Checkout
-      uses: actions/checkout@v4
+      run: |
+        pwd
+        ls -ltr
+        jf --version
 
     - name: Build Dotnet Component
       id: dotnet-build
