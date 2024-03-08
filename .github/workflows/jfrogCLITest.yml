@@ -29,6 +29,14 @@ jobs:
       run: |
         zip -r dotnet-artifacts.zip dotnetProj/WebApp/bin/Debug/net7.0
 
+    - name: Resolve Repository Name
+      run: |
+        ARTI_NPM_REPO=$( echo $ARTI_REPO | sed 's/nuget/npm/')
+        echo "ARTI_NPM_REPO=$ARTI_NPM_REPO" >> $GITHUB_ENV
+
+        ARTI_GENERIC_REPO=$( echo $ARTI_REPO | sed 's/nuget/generic/')
+        echo "ARTI_GENERIC_REPO=$ARTI_GENERIC_REPO" >> $GITHUB_ENV
+        
     - name: Fetch Artifacts Name
       id: fetch-artifacts
       run : |
@@ -81,11 +89,11 @@ jobs:
     - name: Publish Nuget
       if: steps.fetch-artifacts.outputs.nugetTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud1:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsNupkg.nupkg -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{env.ARTI_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsNupkg.nupkg -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-nuget-local/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
     - name: Publish Generic (zip)
       if: steps.fetch-artifacts.outputs.zipTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud1:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://studenthome.jfrog.io/artifactory/${{ env.ARTI_GENERIC_REPO }}/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
+        curl -v --user raju4cloud1:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-generic-local/${{ fromJson(steps.read-json.outputs.packageConfig).version }}/"
 
     
