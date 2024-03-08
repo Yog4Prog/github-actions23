@@ -30,7 +30,7 @@ jobs:
       run: |
         pwd
         ls -ltr
-        jf --version
+        ./jf --version
 
     - name: Build Dotnet Component
       id: dotnet-build
