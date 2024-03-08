@@ -114,5 +114,5 @@ jobs:
       run: | 
        # curl -v --user raju4cloud:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-generic-local/${{ github.run_id }}/"
        ./jf rt upload "**/*/*.zip" "gitact-generic-local/1.0.1.${{ github.run_id }}" --build-name="student-home-web-app" --build-number="1.0.1.${{ github.run_id }}"
-       ./jf rt build-publish "student-home-web-app" "1.0.1.${{ github.run_id }}"
+       ./jf rt build-publish "student-home-web-app" "1.0.1.${{ github.run_id }} --dry-run"
     
