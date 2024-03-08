@@ -26,16 +26,21 @@ jobs:
         chmod +x jf
         lscpu
     
-    - name: Verify JFrog CLI installation
+    - name: Setup JFrog CLI installation
       run: |
         pwd
         ls -ltr
         ./jf --version
+        ./jf config add student3642 --artifactory-url "https://student3642.jfrog.io/artifactory" --user="raju4cloud" --password="AKCpBrwZPApYJGo9rCnqW2cLghhCwhNoN3ihEvzdSzHCCNNYx6U3sp4ftMmxPcRbg6Wem1779" --interactive=false
+        ./jf dotnet-config --nuget-v2 "true" --repo-resolve "external-nuget-virtual"
 
     - name: Build Dotnet Component
       id: dotnet-build
       run : |
-        dotnet msbuild 'dotnetProj/build.proj'
+        ./jf dotnet build 'dotnetProj/build.proj' --build-name "student-home-web-app" --build-number="1.0.1.${{ github.run_id }}"
+        ./jf rt build-collect-env "student-home-web-app" "1.0.1.${{ github.run_id }}
+        ./jf rt build-add-git "student-home-web-app" "1.0.1.${{ github.run_id }}
+
         
     - name: Zip Dotnet Artifacts
       id: zip-dotnet-artifacts
@@ -107,6 +112,7 @@ jobs:
     - name: Publish Generic (zip)
       if: steps.fetch-artifacts.outputs.zipTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-generic-local/${{ github.run_id }}/"
-
+       # curl -v --user raju4cloud:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsZip.zip -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-generic-local/${{ github.run_id }}/"
+       ./jf rt upload "**/*/bin/Debug/*/*.dll" gitact-generic-local --build-name "student-home-web-app" --build-number="1.0.1.${{ github.run_id }}"
+       ./jf rt build-publish --build-name "student-home-web-app" --build-number="1.0.1.${{ github.run_id }}"
     
