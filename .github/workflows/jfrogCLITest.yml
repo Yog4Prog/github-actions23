@@ -107,7 +107,7 @@ jobs:
     - name: Publish Nuget
       if: steps.fetch-artifacts.outputs.nugetTypeArtifact-exists == 'true'
       run: | 
-        curl -v --user raju4cloud:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsNupkg.nupkg -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-nuget-local/${{ github.run_id }}/"
+    #    curl -v --user raju4cloud:AP4UtprjFee8DhzKi2db3waW8tr -T artifactsNupkg.nupkg -X PUT -H 'X-Explode-Archive: true' "https://student3642.jfrog.io/artifactory/gitact-nuget-local/${{ github.run_id }}/"
 
     - name: Publish Generic (zip)
       if: steps.fetch-artifacts.outputs.zipTypeArtifact-exists == 'true'
